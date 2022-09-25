@@ -1,16 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import axios from 'axios'
-
+import api from './api/api'
 
 export default function App() {
   const [search, setSearch] = useState('');
 
   const getVideos = async() => {
-    const result = await axios.get('https://www.googleapis.com/youtube/v3/search?q=boating&key=AIzaSyD7XZQf-k9SuLkH2tLFHbJgt_y8nD6wLHI')
+    const result = await api.get(`https://www.googleapis.com/youtube/v3/search?${search}`, {
+      params:{
+       key: 'AIzaSyD7XZQf-k9SuLkH2tLFHbJgt_y8nD6wLHI',
+        maxResults: '7',
+        part: 'snippet',
+        order: 'title',
+        regionCode: 'BR',
+        q:'barco',
+        relevanceLanguage:'pt'
+      }
+    })
     console.log(result)
+    setSearch(result)
   }
+  
   return (
     <View style={styles.container}>
       
