@@ -20,6 +20,7 @@ export default function User() {
           <Text>enviar</Text>
           </TouchableOpacity>
           <Text>{data}</Text>
+          
        
        </View>
      );
